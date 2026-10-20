@@ -1,0 +1,212 @@
+/* Clara Rocha — biolink no formato do Instagram, escuro e minimalista.
+   Paleta: preto, branco, cinzas do Instagram e o azul do selo. Sem sombra, sem gradiente. */
+
+:root {
+  --bg: #000000;
+  --ink: #f5f5f5;
+  --muted: #a8a8a8;
+  --line: #262626;
+  --surface: #121212;
+  --blue: #0095f6;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 14px/1.45 "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+:focus-visible { outline: 1px solid var(--ink); outline-offset: 3px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+.page {
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  padding: max(48px, env(safe-area-inset-top)) 20px max(32px, env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* Perfil */
+.profile { display: flex; flex-direction: column; align-items: center; text-align: center; }
+
+/* Capa: foto em tela cheia no topo, escurecendo até o preto da página */
+.page { padding-top: 0; }
+.cover {
+  position: relative;
+  width: calc(100% + 40px);
+  margin: 0 -20px;
+}
+.cover img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; background: var(--surface); }
+.cover::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent 55%, var(--bg) 100%);
+  pointer-events: none;
+}
+.cover-text { position: absolute; left: 0; right: 0; bottom: 8px; z-index: 1; }
+@media (min-width: 460px) {
+  .page { padding-top: 32px; }
+  .cover { width: 100%; margin: 0; border-radius: 12px; overflow: hidden; }
+}
+
+.handle {
+  margin: 0;
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 18px; font-weight: 600; letter-spacing: -.01em;
+}
+.verified { width: 16px; height: 16px; fill: var(--blue); }
+.verified .check { fill: none; stroke: #fff; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.name { margin: 2px 0 0; font-weight: 500; }
+.bio { margin: 12px 0 0; color: var(--muted); }
+
+.stats {
+  list-style: none; margin: 20px 0 0; padding: 0;
+  display: flex; gap: 28px;
+}
+.stats li { display: flex; flex-direction: column; }
+.stats strong { font-weight: 600; font-size: 15px; }
+.stats span { color: var(--muted); font-size: 12px; }
+
+.actions { width: 100%; display: flex; gap: 8px; margin-top: 20px; }
+.pill {
+  flex: 1;
+  padding: 9px 12px;
+  border-radius: 8px;
+  background: var(--line);
+  font-weight: 600; font-size: 14px; text-align: center;
+  transition: opacity .2s ease;
+}
+.pill-primary { background: var(--ink); color: var(--bg); }
+@media (hover: hover) { .pill:hover { opacity: .85; } }
+
+/* Destaques */
+.highlights { display: flex; justify-content: center; gap: 16px; }
+.section { scroll-margin-top: 16px; }
+.rows li.brand { scroll-margin-top: 16px; }
+.highlights a { display: flex; flex-direction: column; align-items: center; gap: 6px; width: 64px; }
+.highlights img {
+  width: 64px; height: 64px; border-radius: 50%; object-fit: cover;
+  padding: 3px; border: 1px solid var(--line); background: var(--surface);
+}
+.highlights span { font-size: 12px; }
+
+
+/* Seções */
+.section h2 { margin: 0 0 12px; font-size: 14px; font-weight: 600; }
+.muted { margin: -6px 0 12px; color: var(--muted); }
+
+.rows { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.rows li {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 14px 0; border-bottom: 1px solid var(--line);
+}
+.rows li.brand { flex-direction: column; align-items: stretch; gap: 12px; }
+.brand-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; border-radius: 6px; overflow: hidden; }
+.brand-photos img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; background: var(--surface); }
+.brand-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+
+.code {
+  padding: 6px 12px;
+  border: 1px dashed #3a3a3a; border-radius: 6px;
+  background: none; color: var(--ink);
+  font: 600 12px/1 ui-monospace, "SF Mono", Menlo, monospace; letter-spacing: .08em;
+  cursor: pointer;
+}
+.code[data-done] { border-style: solid; border-color: var(--ink); }
+
+.links { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.btn {
+  padding: 12px; border-radius: 8px;
+  background: var(--surface); border: 1px solid var(--line);
+  text-align: center; font-weight: 500;
+  transition: border-color .2s ease;
+}
+@media (hover: hover) { .btn:hover { border-color: #3a3a3a; } }
+
+/* Rodapé */
+.foot { display: flex; justify-content: center; gap: 20px; padding-top: 8px; }
+.text-link {
+  padding: 4px 0; border: 0; background: none;
+  font: inherit; font-size: 12px; color: var(--muted); cursor: pointer;
+}
+.text-link:hover { color: var(--ink); }
+
+/* Aviso "copiado" */
+.toast {
+  position: fixed; left: 50%; bottom: 24px; margin: 0;
+  transform: translate(-50%, 12px); opacity: 0; pointer-events: none;
+  padding: 10px 16px; border-radius: 8px;
+  background: var(--ink); color: var(--bg); font-weight: 500; font-size: 13px;
+  transition: opacity .2s ease, transform .2s ease;
+}
+.toast[data-show] { opacity: 1; transform: translate(-50%, 0); }
+
+/* Modal */
+.lead {
+  width: min(360px, calc(100% - 32px)); padding: 0;
+  border: 1px solid var(--line); border-radius: 12px;
+  background: var(--surface); color: var(--ink);
+}
+.lead::backdrop { background: rgba(0, 0, 0, .7); }
+.lead-form { position: relative; display: flex; flex-direction: column; gap: 14px; padding: 24px 20px 18px; }
+.lead-form h2 { margin: 0 0 4px; font-size: 16px; font-weight: 600; }
+.lead-close {
+  position: absolute; top: 12px; right: 12px; border: 0; background: none;
+  color: var(--muted); font-size: 20px; line-height: 1; cursor: pointer;
+}
+.channel { display: flex; gap: 16px; margin: 0; padding: 0; border: 0; }
+.channel input { position: absolute; opacity: 0; pointer-events: none; }
+.channel span { font-size: 13px; color: var(--muted); cursor: pointer; padding-bottom: 2px; border-bottom: 1px solid transparent; }
+.channel input:checked + span { color: var(--ink); border-color: var(--ink); }
+.channel input:focus-visible + span { outline: 1px solid var(--ink); outline-offset: 3px; }
+.field input {
+  width: 100%; padding: 11px 12px;
+  border: 1px solid var(--line); border-radius: 8px;
+  background: var(--bg); color: var(--ink);
+  font: inherit; font-size: 16px;
+}
+.field input:focus { outline: none; border-color: #555; }
+.field input::placeholder { color: #6e6e6e; }
+.consent { display: flex; gap: 8px; align-items: center; font-size: 12px; color: var(--muted); }
+.consent a { text-decoration: underline; }
+.consent input { margin: 0; accent-color: var(--blue); }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.turnstile:empty { display: none; }
+.submit {
+  padding: 11px; border: 0; border-radius: 8px;
+  background: var(--blue); color: #fff;
+  font: inherit; font-weight: 600; cursor: pointer;
+}
+.submit[disabled] { opacity: .5; }
+.status { min-height: 1em; margin: 0; font-size: 12px; text-align: center; color: var(--muted); }
+.status[data-state="ok"] { color: var(--ink); }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+
+/* Parceria com uma foto só (curso de inglês) */
+.brand-photos.single { grid-template-columns: 1fr; }
+.brand-photos.single img { aspect-ratio: 5 / 4; }
+.tag { margin-left: 6px; color: var(--muted); font-size: 12px; }
+
+/* Crédito discreto no fim da página */
+.credit { margin: 8px 0 0; text-align: center; font-size: 10px; color: #4a4a4a; letter-spacing: .02em; }
+.credit a:hover { color: var(--muted); }
+
+/* Botão de link (parceria sem cupom) */
+.go {
+  padding: 6px 14px; border-radius: 6px;
+  background: var(--ink); color: var(--bg);
+  font-size: 12px; font-weight: 600; letter-spacing: .02em;
+}
+.go:hover { opacity: .85; }
