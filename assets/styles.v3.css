@@ -197,6 +197,7 @@ img { display: block; max-width: 100%; }
 /* Parceria com uma foto só (curso de inglês) */
 .brand-photos.single { grid-template-columns: 1fr; }
 .brand-photos.single img { aspect-ratio: 5 / 4; }
+.brand-photos.trio { grid-template-columns: repeat(3, 1fr); }
 .tag { margin-left: 6px; color: var(--muted); font-size: 12px; }
 
 /* Crédito discreto no fim da página */
